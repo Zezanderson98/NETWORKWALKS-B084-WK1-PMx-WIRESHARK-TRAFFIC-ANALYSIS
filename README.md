@@ -119,7 +119,8 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 
 
 
-<img width="906" height="540" alt="Wireshark lab 8 port source" src="https://github.com/user-attachments/assets/a91ad94c-8d53-47f3-a734-efa8cc431b8a" />
+<img width="907" height="532" alt="Wireshark lab 7 port source" src="https://github.com/user-attachments/assets/3f4727dd-5a07-43b4-a8ec-b9bc4c16088d" />
+
 
 
 
