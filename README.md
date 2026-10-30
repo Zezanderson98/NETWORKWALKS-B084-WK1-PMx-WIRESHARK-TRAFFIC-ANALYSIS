@@ -57,7 +57,7 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 
 ### Task 1: Baseline Capture Analysis
 * **Objective:** Verify total packet ingestion metrics.
-* **Analysis:** The total baseline packet capture ingests an absolute total of **309 packets**.
+* **Analysis:** The total baseline packet capture ingests an absolute total of 309 packets.
 
 ### Task 2: Connection Inception Isolation (SYN Analysis)
 * **Objective:** Filter traffic to reveal TCP connection initiations.
@@ -65,35 +65,63 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   ```text
   tcp.flags.syn == 1
   ```
-* **Metrics:** Isolating this parameter drops the packet list view to exactly **73 packets** matching the flag criteria.
+* **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and press Enter. The status bar shows exactly `Displayed: 73` packets matching the connection initiation criteria.
 
-### Task 3 & 4: Attacker Tracking & Target Attribution
+### Task 3: Attacker Tracking
 * **Objective:** Determine the source machine committing systematic connection queries.
-* **Analysis:** Evaluating the timeline past the `3.4` second mark reveals a rapid, automated burst of TCP connection requests originating directly from host **`192.168.10.66`** aimed squarely at the Web Server located at **`192.168.10.20`**.
-
-### Task 5 & 6: Profiling the Adversary Vector
-* **Objective:** Identify the source ephemeral footprint and trace the scope of the probe.
-* **Analysis:** 
-  * Inspection of the *Info* column blocks shows that the attacker is anchoring the entire scanning routine from a single static source port: **`52311`**.
-  * Navigating to `Statistics › Conversations › TCP Tab` reveals that this single host rapidly scanned exactly **40 unique destination ports** on the server.
-
-### Task 7, 8 & 9: Server Footprint & Attack Mapping 
-* **Objective:** Determine which destination services are actively running vs rejected.
-* **Analysis Filter:** 
+* **Wireshark Display Filter:** 
   ```text
-  ip.addr == 192.168.10.66
+  tcp.flags.syn == 1
   ```
-* **Findings:**
-  * **Open Ports (Replied with `[SYN, ACK]`):** Ports **`22`** (SSH), **`80`** (HTTP), and **`443`** (HTTPS) are active and listening.
-  * **Closed Ports (Replied with `[RST, ACK]`):** The target server's network stack successfully sent Reset responses back to the attacker on the remaining **37 closed ports**.
+* **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and scroll through the Source column. One source, `192.168.10.66`, sends an automated block of about 40 packets from 3.4 seconds onward. That is the attacker.
 
----
+### Task 4: Target Attribution
+* **Objective:** Identify the targeted destination infrastructure.
+* **Wireshark Display Filter:** 
+  ```text
+  tcp.flags.syn == 1
+  ```
+* **Analysis:** Type `tcp.flags.syn == 1` in the filter bar. The long block of packets comes from the attacker. The Destination column of those packets shows `192.168.10.20`, confirming the target is the web server.
 
-## 🎯 Final Security Threat Assessment
-* **Identified Attacker IP:** `192.168.10.66`
-* **Target Vector Host:** `192.168.10.20`
-* **Attack Method Classification:** **TCP SYN Port Scan**
-* **Impact Summary:** The adversary successfully enumerated three operational pathways (`22, 80, 443`) during this discovery sweep. This metadata could expose those services to tailored exploit attempts or brute-force tracking if perimeter blocking rules are not immediately enacted.
+### Task 5: Profiling the Adversary Vector - Source Footprint
+* **Objective:** Identify the source ephemeral footprint used by the attacker.
+* **Wireshark Display Filter:** 
+  ```text
+  tcp.flags.syn == 1
+  ```
+* **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and look at the attacker's packets. In the Info column, the number before the arrow is the source port. It is `52311` in every packet, while the destination port changes each time.
+
+### Task 6: Profiling the Adversary Vector - Probe Scope
+* **Objective:** Trace the scope and breadth of the active probe.
+* **Analysis:** Navigating to Statistics › Conversations › TCP Tab reveals that this single host rapidly scanned exactly 40 unique destination ports on the server.
+
+### Task 7: Server Footprint - Active Services
+* **Objective:** Identify which destination services are actively running on the target.
+* **Wireshark Display Filter:** 
+  ```text
+  ip.addr == 192.168.10.66 && tcp.flags.syn == 1 && tcp.flags.ack == 1
+  ```
+* **Findings:** Ports 22 (SSH), 80 (HTTP), and 443 (HTTPS) are open, active, and listening (replied with `[SYN, ACK]`).
+
+### Task 8: Server Footprint - Rejected Connections
+* **Objective:** Determine which destination services are closed or rejected.
+* **Wireshark Display Filter:** 
+  ```text
+  ip.addr == 192.168.10.66 && tcp.flags.reset == 1 && tcp.flags.ack == 1
+  ```
+* **Findings:** The target server's network stack successfully sent Reset responses back to the attacker on the remaining 37 closed ports.
+
+### Task 9: Closed Ports Calculation
+* **Objective:** Calculate the precise volume of non-responsive or closed services targeted.
+* **Wireshark Display Filter:** 
+  ```text
+  tcp.flags.reset == 1 && tcp.flags.ack == 1 && ip.src == 192.168.10.20
+  ```
+* **Analysis:** Cross-referencing total connections shows 40 unique destination ports were actively targeted. Because 3 entry points are confirmed open, applying this filter isolates the responses from closed services, mathematically verifying that exactly 37 remaining ports are closed on the server.
+
+### Task 10: Attack Mapping
+* **Objective:** Correlate findings into a comprehensive attack footprint map.
+* **Analysis:** The activity maps out as a standard TCP SYN port scan (stealth scan) targeted at 40 ports, discovering 3 open entry points and encountering 37 closed doors.
 
 ---
 
