@@ -59,6 +59,12 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 * **Objective:** Verify total packet ingestion metrics.
 * **Analysis:** The total baseline packet capture ingests an absolute total of 309 packets.
 
+
+
+<img width="902" height="600" alt="Wireshark lab 3 number of packets" src="https://github.com/user-attachments/assets/ff647f0d-b98e-49a1-88d5-9312f35a7d3b" />
+
+
+
 ### Task 2: Connection Inception Isolation (SYN Analysis)
 * **Objective:** Filter traffic to reveal TCP connection initiations.
 * **Wireshark Display Filter:** 
@@ -66,6 +72,12 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   tcp.flags.syn == 1
   ```
 * **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and press Enter. The status bar shows exactly `Displayed: 73` packets matching the connection initiation criteria.
+
+
+<img width="913" height="609" alt="Wireshark lab 4 Show only Syn packets" src="https://github.com/user-attachments/assets/897cc7ba-8bf3-4242-a61e-2ed09bf13308" />
+
+
+
 
 ### Task 3: Attacker Tracking
 * **Objective:** Determine the source machine committing systematic connection queries.
@@ -75,6 +87,13 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   ```
 * **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and scroll through the Source column. One source, `192.168.10.66`, sends an automated block of about 40 packets from 3.4 seconds onward. That is the attacker.
 
+
+<img width="902" height="600" alt="Wireshark lab 5 Find attacker" src="https://github.com/user-attachments/assets/149159e7-f032-4b1b-bdb9-ec618ed3cb77" />
+
+
+
+
+
 ### Task 4: Target Attribution
 * **Objective:** Identify the targeted destination infrastructure.
 * **Wireshark Display Filter:** 
@@ -82,6 +101,13 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   tcp.flags.syn == 1
   ```
 * **Analysis:** Type `tcp.flags.syn == 1` in the filter bar. The long block of packets comes from the attacker. The Destination column of those packets shows `192.168.10.20`, confirming the target is the web server.
+
+
+<img width="903" height="537" alt="Wireshark lab 6 find the target" src="https://github.com/user-attachments/assets/287b15e4-a3da-48eb-9a4d-59ca8fff85cf" />
+
+
+
+
 
 ### Task 5: Profiling the Adversary Vector - Source Footprint
 * **Objective:** Identify the source ephemeral footprint used by the attacker.
@@ -91,9 +117,25 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   ```
 * **Analysis:** Type `tcp.flags.syn == 1` in the filter bar and look at the attacker's packets. In the Info column, the number before the arrow is the source port. It is `52311` in every packet, while the destination port changes each time.
 
+
+
+<img width="906" height="540" alt="Wireshark lab 8 port source" src="https://github.com/user-attachments/assets/a91ad94c-8d53-47f3-a734-efa8cc431b8a" />
+
+
+
+
+
+
 ### Task 6: Profiling the Adversary Vector - Probe Scope
 * **Objective:** Trace the scope and breadth of the active probe.
 * **Analysis:** Navigating to Statistics › Conversations › TCP Tab reveals that this single host rapidly scanned exactly 40 unique destination ports on the server.
+
+<img width="906" height="540" alt="Wireshark lab 8 port source" src="https://github.com/user-attachments/assets/e45aee6e-a1b2-47e0-a227-0bd0bb8a8d58" />
+
+
+<img width="901" height="526" alt="Wireshark lab 9 number of ports" src="https://github.com/user-attachments/assets/6d0a3b74-568f-4335-bbe5-85244991f84c" />
+
+
 
 ### Task 7: Server Footprint - Active Services
 * **Objective:** Identify which destination services are actively running on the target.
@@ -103,13 +145,28 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   ```
 * **Findings:** Ports 22 (SSH), 80 (HTTP), and 443 (HTTPS) are open, active, and listening (replied with `[SYN, ACK]`).
 
+<img width="915" height="597" alt="Wireshark finding closed port" src="https://github.com/user-attachments/assets/5baa7013-69c5-4617-95f1-d900b033c227" />
+
+
+
+
 ### Task 8: Server Footprint - Rejected Connections
 * **Objective:** Determine which destination services are closed or rejected.
 * **Wireshark Display Filter:** 
   ```text
   ip.addr == 192.168.10.66 && tcp.flags.reset == 1 && tcp.flags.ack == 1
   ```
-* **Findings:** The target server's network stack successfully sent Reset responses back to the attacker on the remaining 37 closed ports.
+* **Findings:** 
+  * Applying this in the filter bar isolates the server's replies for closed ports.
+  * The other replies from the server show `[RST, ACK]`.
+  * The server uses a reset to say the port is closed.
+  * The target server's network stack successfully sent Reset responses back to the attacker on the remaining 37 closed ports.
+
+
+
+
+<img width="915" height="628" alt="Wireshark lab 12 number of port closed" src="https://github.com/user-attachments/assets/3fc724c9-b8cb-4191-8322-1a7d88312ddc" />
+
 
 ### Task 9: Closed Ports Calculation
 * **Objective:** Calculate the precise volume of non-responsive or closed services targeted.
@@ -118,6 +175,11 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
   tcp.flags.reset == 1 && tcp.flags.ack == 1 && ip.src == 192.168.10.20
   ```
 * **Analysis:** Cross-referencing total connections shows 40 unique destination ports were actively targeted. Because 3 entry points are confirmed open, applying this filter isolates the responses from closed services, mathematically verifying that exactly 37 remaining ports are closed on the server.
+
+
+<img width="915" height="628" alt="Wireshark lab 12 number of port closed" src="https://github.com/user-attachments/assets/52696586-fbc0-49b3-a328-abdb64292b6f" />
+
+
 
 ### Task 10: Attack Mapping
 * **Objective:** Correlate findings into a comprehensive attack footprint map.
