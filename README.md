@@ -136,7 +136,8 @@ This laboratory is intended strictly for education purposes only.
 ## 🔗 Tools & Resources
 
 
-Primary Environment: NetworkWalks Academy Live Cyber Range & Forensic Labs
+Primary Environment:  [NetworkWalks Wireshark Lab 3](https://networkwalks.com/wireshark-lab3/) Live Cyber Range & Forensic Labs
+ab Instance)
 
 Analysis Tool: Wireshark Packet Analyzer (Integrated Lab Instance)
 
