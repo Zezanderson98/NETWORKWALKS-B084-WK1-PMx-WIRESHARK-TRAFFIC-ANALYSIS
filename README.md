@@ -4,7 +4,7 @@
 
 <div align="center">
 
-# 🔐 SOC Analyst Lab: Traffic Analysis & Reconnaissance Detection
+# 🔐 SOC Analyst Lab: Traffic Analysis & Reconnaissance Detection via Wireshark
 
 **Detecting Reconnaissance & Port Scanning via Wireshark**
 </div>
