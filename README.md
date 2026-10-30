@@ -139,7 +139,10 @@ Wireshark Official Site: https://wireshark.org
 
 Sample PCAP Repository: https://wireshark.org
 
-PacketTotal Sandbox: https://packettotal.com
+Network Total Sandbox:** https://networktotal.net
+
+Malware Traffic Analysis:** https://malware-traffic-analysis.net
+
 
 ## 👤 Author
 
