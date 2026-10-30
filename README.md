@@ -145,7 +145,7 @@ Threat Reference Hub: https://malware-traffic-analysis.net
 
 Official Documentation: https://wireshark.org
 
-👤 Author
+
 
 ## 👤 Author
 
