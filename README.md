@@ -137,11 +137,11 @@ This laboratory is intended strictly for education purposes only.
 
 
 Primary Environment:  [NetworkWalks Wireshark Lab 3](https://networkwalks.com/wireshark-lab3/) Live Cyber Range & Forensic Labs
-ab Instance)
+ab Instance
 
 Analysis Tool: Wireshark Packet Analyzer (Integrated Lab Instance)
 
-Threat Reference Hub:https://malware-traffic-analysis.net
+Threat Reference Hub: https://malware-traffic-analysis.net
 
 Official Documentation: https://wireshark.org
 
