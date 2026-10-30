@@ -135,12 +135,16 @@ This laboratory is intended strictly for education purposes only.
 
 ## 🔗 Tools & Resources
 
-Wireshark Official Site: https://wireshark.org
 
-VirusTotal:** https://www.virustotal.com
+Primary Environment: NetworkWalks Academy Live Cyber Range & Forensic Labs
 
-Malware Traffic Analysis:** https://malware-traffic-analysis.net
+Analysis Tool: Wireshark Packet Analyzer (Integrated Lab Instance)
 
+Threat Reference Hub:https://malware-traffic-analysis.net
+
+Official Documentation: https://wireshark.org
+
+👤 Author
 
 ## 👤 Author
 
