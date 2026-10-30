@@ -26,7 +26,7 @@
 ## 📌 Project Overview
 In a production enterprise network, early detection of malicious reconnaissance is critical to stopping a full-scale cyber attack before it starts. This project simulates a real-world Security Operations Center (SOC) scenario where unusual traffic was reported heading towards an internal corporate web server. Using deep packet inspection (DPI) techniques within Wireshark, this lab walks through the exact steps required to identify anomalous scanning behavior, map out the adversary's footprint, and verify server vulnerability exposures.
 
-* **Live Lab Environment:** [NetworkWalks Wireshark Lab 3](https://networkwalks.com)
+* **Live Lab Environment:** [NetworkWalks Wireshark Lab 3](https://networkwalks.com/wireshark-lab3/)
 * **Core Technical Competencies:** Network Traffic Analysis, Custom Display Filters, Protocol Verification (TCP Handshake), and Incident Attribution.
 
 ---
