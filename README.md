@@ -48,7 +48,8 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 
 
 
-<img width="688" height="320" alt="Topology diagram" src="https://github.com/user-attachments/assets/301fbb67-77b6-4bfe-b366-7e30c89f7326" />
+<img width="689" height="292" alt="real topogy diagram" src="https://github.com/user-attachments/assets/d95cce36-de34-4f8a-ba7d-b425cc5c88f4" />
+
 
 ---
 
