@@ -137,8 +137,6 @@ This laboratory is intended strictly for education purposes only.
 
 Wireshark Official Site: https://wireshark.org
 
-Sample PCAP Repository: https://wireshark.org
-
 VirusTotal:** https://www.virustotal.com
 
 Malware Traffic Analysis:** https://malware-traffic-analysis.net
