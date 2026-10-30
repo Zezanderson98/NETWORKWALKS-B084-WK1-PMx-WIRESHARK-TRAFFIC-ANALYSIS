@@ -130,21 +130,21 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 2. **Defensive Rulemaking:** Network security controls (Firewalls/IDS) should be configured with thresholds to detect an anomalous volume of `RST, ACK` rejections coming from single destination assets inside a localized time-window to trigger automated perimeter IP blocks.
 
 
-  🔐 Security & Ethical Use
+##   🔐 Security & Ethical Use
 This laboratory is intended strictly for education purposes only.
 
-🔗 Tools & Resources
+## 🔗 Tools & Resources
 Wireshark Official Site: https://wireshark.org
 Sample PCAP Repository: https://wireshark.org
 PacketTotal Sandbox: https://packettotal.com
 
-👤 Author
+## 👤 Author
 Anderson Edaiyo Uzezi
 Cybersecurity Professional B082
 
 LinkedIn: https://www.linkedin.com/in/anderson-edaiyo-bab74117b
 
-📊 Project Information Matrix
+## 📊 Project Information Matrix
 > [!NOTE]
 > This repository contains the complete documentation, environment blueprints, and live verification logs for my Week 01 specialized laboratory deployment focusing on deep packet inspection and network forensics.
 
