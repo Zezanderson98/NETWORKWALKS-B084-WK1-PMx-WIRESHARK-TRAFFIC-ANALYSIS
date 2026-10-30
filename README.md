@@ -134,12 +134,17 @@ The ultimate purpose of this exercise is to master the **Reconnaissance Phase of
 This laboratory is intended strictly for education purposes only.
 
 ## 🔗 Tools & Resources
+
 Wireshark Official Site: https://wireshark.org
+
 Sample PCAP Repository: https://wireshark.org
+
 PacketTotal Sandbox: https://packettotal.com
 
 ## 👤 Author
+
 Anderson Edaiyo Uzezi
+
 Cybersecurity Professional B082
 
 LinkedIn: https://www.linkedin.com/in/anderson-edaiyo-bab74117b
