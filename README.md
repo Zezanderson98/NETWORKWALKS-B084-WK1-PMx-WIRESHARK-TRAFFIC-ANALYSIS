@@ -200,7 +200,7 @@ This laboratory is intended strictly for education purposes only.
 
 
 Primary Environment:  [NetworkWalks Wireshark Lab 3](https://networkwalks.com/wireshark-lab3/) Live Cyber Range & Forensic Labs
-ab Instance
+Instance
 
 Analysis Tool: Wireshark Packet Analyzer (Integrated Lab Instance)
 
